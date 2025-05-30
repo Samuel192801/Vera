@@ -1,0 +1,13 @@
+{
+  "name": "vera",
+  "version": "1.0.0",
+  "description": "Vera - IA Autônoma que aprende e se auto-programa",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node backend/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  }
+}
