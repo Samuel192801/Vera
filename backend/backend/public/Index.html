@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🧠 Vera - IA Autônoma</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    #chatInput {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    #responses {
+      margin-top: 1rem;
+    }
+    .response {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Vera — IA Autônoma</h1>
+
+  <div id="responses"></div>
+
+  <form id="chatForm">
+    <input type="text" id="chatInput" placeholder="Digite algo..." />
+  </form>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    document.getElementById('chatForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (text) {
+        socket.emit('userMessage', {
+          text,
+          user: 'Samuel RM',
+          key: '@minecraft123'
+        });
+        input.value = '';
+      }
+    });
+
+    socket.on('aiResponse', (data) => {
+      const res = document.createElement('div');
+      res.className = 'response';
+      res.innerHTML = `<strong>🧠:</strong> ${data.text}`;
+      document.getElementById('responses').prepend(res);
+    });
+  </script>
+</body>
+</html>
